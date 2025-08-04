@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+
+    <title>青梧</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'SF Pro Display', 'PingFang SC', sans-serif;
+            user-select: none;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(45deg, #1a0c2e, #0e051a);
+            overflow: hidden;
+            color: white;
+        }
+        
+        .container {
+            position: relative;
+            width: 470px;
+            height: 400px;
+            transform-style: preserve-3d;
+            perspective: 800px;
+        }
+        
+        .stars-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(107, 0, 250, 0.18) 0%, transparent 30%),
+                radial-gradient(circle at 80% 70%, rgba(174, 0, 255, 0.15) 0%, transparent 40%);
+            z-index: 0;
+            animation: rotateGalaxy 120s linear infinite;
+        }
+        
+        @keyframes rotateGalaxy {
+            to { transform: rotate(360deg); }
+        }
+        
+        .login-panel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(30, 15, 55, 0.95);
+            border-radius: 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(156, 39, 176, 0.55);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            transform: translateZ(20px);
+            animation: floatLogin 8s ease-in-out infinite;
+        }
+        
+        @keyframes floatLogin {
+            0%, 100% { transform: translateZ(20px) translateY(0) rotateX(5deg); }
+            50% { transform: translateZ(20px) translateY(-10px) rotateX(8deg); }
+        }
+        
+        .login-title {
+            font-size: 24px;
+            margin-bottom: 25px;
+            text-align: center;
+            background: linear-gradient(45deg, #ff00cc, #7e2eff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .input-group {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(20, 5, 40, 0.7);
+            border: 1px solid rgba(170, 94, 255, 0.45);
+            border-radius: 12px;
+            color: white;
+            font-size: 14px;
+            margin-bottom: 15px;
+            transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: #5d9cec;
+            background: rgba(93, 156, 236, 0.2);
+            box-shadow: 0 0 0 2px rgba(93, 156, 236, 0.3);
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(45deg, #9c27b0, #673ab7);
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+            box-shadow: 0 6px 18px rgba(156, 39, 176, 0.65);
+        }
+        
+        .login-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 9px 22px rgba(224, 64, 251, 0.7);
+        }
+        
+        .main-ui {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(35, 20, 60, 0.95);
+            border-radius: 18px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 50;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(170, 94, 255, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            display: none;
+            animation: floatPanel 10s ease-in-out infinite;
+        }
+        
+        @keyframes floatPanel {
+            0%, 100% { transform: translateZ(20px) translateY(0) rotate3d(0.2, 0.5, 0.1, 1deg); }
+            50% { transform: translateZ(20px) translateY(-8px) rotate3d(0.1, 0.3, 0.2, -1.5deg); }
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 18px;
+            position: relative;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 5;
+        }
+        
+        .user-info {
+            font-size: 12px;
+            color: rgba(230, 210, 255, 0.9);
+            transform: translateZ(10px);
+        }
+        
+        .user-title {
+            font-weight: 600;
+            font-size: 14px;
+            color: white;
+            margin-bottom: 3px;
+            letter-spacing: 0.5px;
+            transform: translateZ(10px);
+        }
+        
+        .ui-brand {
+            font-weight: 700;
+            font-size: 16px;
+            background: linear-gradient(45deg, #ff00cc, #7e2eff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 0.8px;
+            transform: translateZ(10px);
+        }
+        
+        .header-controls {
+            display: flex;
+            gap: 8px;
+            transform: translateZ(10px);
+        }
+        
+        .control-btn {
+            width: 22px;
+            height: 22px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            background: rgba(60, 30, 100, 0.5);
+            color: rgba(255, 255, 255, 0.85);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+            font-size: 10px;
+        }
+        
+        .control-btn:hover {
+            background: rgba(80, 40, 140, 0.7);
+            transform: scale(1.2);
+            box-shadow: 0 0 8px rgba(180, 70, 225, 0.8);
+        }
+        
+        .close-btn:hover {
+            background: rgba(200, 40, 40, 0.8);
+        }
+        
+        .island {
+            position: absolute;
+            top: 16px;
+            left: 50%;
+            transform: translateX(-50%) translateZ(20px);
+            background: rgba(45, 25, 80, 0.8);
+            padding: 6px 16px;
+            border-radius: 30px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 12px;
+            z-index: 10;
+            transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(224, 64, 251, 0.35);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .island:hover {
+            transform: translate(-50%, -3px) scale(1.05) translateZ(20px);
+            box-shadow: 0 8px 18px rgba(128, 0, 255, 0.4);
+        }
+        
+        .content-container {
+            display: flex;
+            height: calc(100% - 96px);
+        }
+        
+        .sidebar {
+            width: 48px;
+            height: 100%;
+            padding: 12px 6px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            background: rgba(35, 20, 60, 0.8);
+            border-top-right-radius: 12px;
+            border-bottom-right-radius: 12px;
+            transform: translateZ(10px);
+        }
+        
+        .nav-btn {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(55, 25, 85, 0.45);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+            position: relative;
+            overflow: hidden;
+            animation: floatBtn 6s infinite ease-in-out;
+            border: 1px solid rgba(224, 64, 251, 0.25);
+            font-size: 13px;
+            transform-style: preserve-3d;
+        }
+        
+        .nav-btn:nth-child(1) { animation-delay: 0s; }
+        .nav-btn:nth-child(2) { animation-delay: 0.2s; }
+        .nav-btn:nth-child(3) { animation-delay: 0.4s; }
+        .nav-btn:nth-child(4) { animation-delay: 0.6s; }
+        .nav-btn:nth-child(5) { animation-delay: 0.8s; }
+        
+        @keyframes floatBtn {
+            0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+            50% { transform: translateY(-6px) rotate(3deg) scale(1.05); }
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-6px) scale(1.1);
+            background: rgba(70, 40, 110, 0.8);
+            box-shadow: 0 0 15px rgba(200, 100, 255, 0.6);
+        }
+        
+        .nav-btn.active {
+            transform: translateY(-6px) scale(1.1);
+            background: linear-gradient(45deg, #9c27b0, #7b1fa2);
+            animation: pulse 1.5s infinite;
+            box-shadow: 0 0 20px rgba(224, 64, 251, 0.8);
+        }
+        
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 10px rgba(224, 64, 251, 0.6); }
+            50% { box-shadow: 0 0 25px rgba(224, 64, 251, 0.9); }
+        }
+        
+        .nav-btn i {
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+        
+        .content-area {
+            flex: 1;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            transform-style: preserve-3d;
+            perspective: 500px;
+        }
+        
+        .tab-container {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transform: translateZ(5px);
+        }
+        
+        .tab-btn {
+            padding: 4px 8px;
+            font-size: 12px;
+            background: rgba(45, 25, 80, 0.6);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transform: translateZ(5px);
+        }
+        
+        .tab-btn:hover {
+            background: rgba(65, 35, 110, 0.8);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .tab-btn.active {
+            background: linear-gradient(45deg, #9c27b0, #7b1fa2);
+            box-shadow: 0 0 10px rgba(224, 64, 251, 0.7);
+            transform: translateY(-3px) scale(1.05);
+        }
+        
+        .example-grid {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin-bottom: 12px;
+            transform-style: preserve-3d;
+            perspective: 400px;
+        }
+        
+        .example-box {
+            background: rgba(45, 25, 80, 0.6);
+            border-radius: 8px;
+            padding: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transform: translateZ(5px);
+        }
+        
+        .example-box:hover {
+            transform: translateY(-3px) scale(1.02) translateZ(5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+        }
+        
+        .box-title {
+            font-size: 12px;
+            margin-bottom: 6px;
+            color: #d3aaff;
+            transform: translateZ(5px);
+        }
+        
+        .box-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6px;
+            width: 100%;
+            transform: translateZ(5px);
+        }
+        
+        .content-btn {
+            padding: 4px 8px;
+            background: rgba(65, 35, 110, 0.8);
+            border-radius: 6px;
+            font-size: 12px;
+            transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+            transform: translateZ(5px);
+        }
+        
+        .content-btn:hover {
+            transform: translateY(-2px) scale(1.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(45deg, #7b1fa2, #673ab7);
+        }
+        
+        .switch-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: auto;
+            transform: translateZ(5px);
+        }
+        
+        .switch-btn {
+            padding: 6px 10px;
+            background: rgba(65, 35, 110, 0.8);
+            border-radius: 8px;
+            font-size: 12px;
+            transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+            transform: translateZ(5px);
+        }
+        
+        .switch-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(45deg, #7b1fa2, #673ab7);
+        }
+        
+        .music-panel {
+            height: 48px;
+            padding: 8px 15px;
+            background: rgba(35, 20, 60, 0.95);
+            display: flex;
+            align-items: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            transform: translateZ(5px);
+        }
+        
+        .music-display {
+            font-size: 12px;
+            font-weight: 600;
+            color: rgba(230, 210, 255, 0.95);
+            min-width: 90px;
+            transform: translateZ(5px);
+        }
+        
+        .author-info {
+            flex: 1;
+            font-size: 12px;
+            color: rgba(230, 210, 255, 0.8);
+            transform: translateZ(5px);
+        }
+        
+        .brand-highlight {
+            font-weight: 700;
+            font-size: 14px;
+            color: #e0b0ff;
+            margin-top: 2px;
+            transform: translateZ(5px);
+        }
+        
+        .notification-popup {
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px) translateZ(15px);
+            background: rgba(40, 20, 70, 0.95);
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 12px;
+            width: 260px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            z-index: 9;
+            line-height: 1.5;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(170, 94, 255, 0.65);
+        }
+        
+        .notification-popup.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0) translateZ(15px);
+        }
+        
+        .floating-star {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 6px rgba(224, 64, 251, 0.6);
+            animation: float 8s infinite ease-in-out;
+            transform: translateZ(0);
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(4px, -6px); }
+            50% { transform: translate(0, -10px); }
+            75% { transform: translate(-4px, -6px); }
+        }
+        
+        .content-page {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 12px;
+            display: none;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+        
+        .content-page.active {
+            display: flex;
+            flex-direction: column;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .login-message {
+            height: 18px;
+            font-size: 12px;
+            color: #ff5ce6;
+            margin-top: 15px;
+            text-align: center;
+            transform: translateZ(5px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="stars-bg"></div>
+        
+        <div class="floating-star" style="top: 25%; left: 25%; animation-delay: 0s;"></div>
+        <div class="floating-star" style="top: 65%; left: 15%; animation-delay: 1s;"></div>
+        <div class="floating-star" style="top: 40%; left: 75%; animation-delay: 2s;"></div>
+        <div class="floating-star" style="top: 75%; left: 80%; animation-delay: 3s;"></div>
+        
+        <div class="login-panel" id="loginPanel">
+            <div class="login-title">青梧</div>
+            <div class="input-group">
+                <input type="text" id="username" placeholder="用户名">
+                <input type="password" id="password" placeholder="卡密">
+            </div>
+            <button class="login-btn" id="loginBtn">登 录</button>
+            <div class="login-message" id="loginMessage"></div>
+        </div>
+        
+        <div class="main-ui" id="mainUI">
+            <div class="header">
+                <div>
+                    <div class="user-title">作者:不凡不平凡</div>
+                    <div class="user-info">青梧</div>
+                </div>
+                <div class="ui-brand">UI</div>
+                <div class="header-controls">
+                    <div class="control-btn"><i class="fas fa-bars"></i></div>
+                    <div class="control-btn"><i class="fas fa-minus"></i></div>
+                    <div class="control-btn close-btn"><i class="fas fa-times"></i></div>
+                </div>
+            </div>
+            
+            <div class="island" id="island">
+                <i class="fas fa-star"></i>公告
+            </div>
+            
+            <div class="notification-popup" id="notificationPopup">
+                青梧<br>
+             
+                不凡平凡
+            </div>
+            
+            <div class="content-container">
+                <div class="sidebar">
+                    <div class="nav-btn active" data-content="home">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="nav-btn" data-content="feature">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <div class="nav-btn" data-content="game">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <div class="nav-btn" data-content="music">
+                        <i class="fas fa-music"></i>
+                    </div>
+                </div>
+                
+                <div class="content-area">
+                 
+                    <div class="content-page active" id="homePage">
+                        <div class="tab-container">
+                            <div class="tab-btn active" data-tab="examples">
+                                <i class="fas fa-th-large"></i>示例
+                            </div>
+                            <div class="tab-btn" data-tab="tests">
+                                <i class="fas fa-tasks"></i> 测试
+                            </div>
+                        </div>
+                        
+                        <div class="example-grid">
+                            <div class="example-box">
+                                <div class="box-title">示例</div>
+                                <div class="box-content">
+                                    <div class="content-btn">例子</div>
+                                    <div class="content-btn">例子</div>
+                                    <div class="content-btn">测试1</div>
+                                    <div class="content-btn">测试1</div>
+                                </div>
+                            </div>
+                            <div class="example-box">
+                                <div class="box-title">示例</div>
+                                <div class="box-content">
+                                    <div class="content-btn">测试1</div>
+                                    <div class="content-btn">测试1</div>
+                                    <div class="content-btn">测试1</div>
+                                    <div class="content-btn">测试1</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="example-grid">
+                            <div class="example-box">
+                                <div class="box-title">示例</div>
+                                <div class="box-content">
+                                    <div class="content-btn">示例</div>
+                                    <div class="content-btn">示例</div>
+                                    <div class="content-btn">示例</div>
+                                    <div class="content-btn">示例</div>
+                                </div>
+                            </div>
+                            <div class="example-box">
+                                <div class="box-title">示例</div>
+                                <div class="box-content">
+                                    <div class="content-btn">示例</div>
+                                    <div class="content-btn">示例</div>
+                                    <div class="content-btn">示例</div>
+                                    <div class="content-btn">示例</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="switch-container">
+                            <div class="switch-btn">不凡不平凡</div>
+                            <div class="switch-btn">青梧</div>
+                        </div>
+                    </div>
+                    
+                
+                    <div class="content-page" id="featurePage">
+                        <div class="example-grid">
+                            <div class="example-box">
+                                <div class="box-title">功能1</div>
+                                <div class="box-content">
+                                    <div class="content-btn">按钮</div>
+                                    <div class="content-btn">按钮</div>
+                                    <div class="content-btn">按钮</div>
+                                    <div class="content-btn">按钮</div>
+                                </div>
+                            </div>
+                            <div class="example-box">
+                                <div class="box-title">功能2</div>
+                                <div class="box-content">
+                                    <div class="content-btn">按钮</div>
+                                    <div class="content-btn">按钮</div>
+                                    <div class="content-btn">按钮</div>
+                                    <div class="content-btn">按钮</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="example-grid">
+                            <div class="example-box">
+                                <div class="box-title">高级设置</div>
+                                <div class="box-content">
+                                    <div class="content-btn">选项</div>
+                                    <div class="content-btn">选项</div>
+                                    <div class="content-btn">选项</div>
+                                    <div class="content-btn">选项</div>
+                                </div>
+                            </div>
+                            <div class="example-box">
+                                <div class="box-title">高级功能</div>
+                                <div class="box-content">
+                                    <div class="content-btn">选项</div>
+                                    <div class="content-btn">选项</div>
+                                    <div class="content-btn">选项</div>
+                                    <div class="content-btn">选项</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="switch-container">
+                            <div class="switch-btn"> 按钮 </div>
+                            <div class="switch-btn"> 按钮 </div>
+                        </div>
+                    </div>
+                    
+             
+                    <div class="content-page" id="gamePage">
+                        <div class="example-grid">
+                            <div class="example-box">
+                                <div class="box-title"> 按钮 </div>
+                                <div class="box-content">
+                                    <div class="content-btn"> 按钮 </div>
+                                    <div class="content-btn"> 按钮 </div>
+                                    <div class="content-btn"> 按钮 </div>
+                                    <div class="content-btn"> 按钮 </div>
+                                </div>
+                            </div>
+                            <div class="example-box">
+                                <div class="box-title">设置</div>
+                                <div class="box-content">
+                                    <div class="content-btn"> 按钮 </div>
+                                    <div class="content-btn"> 按钮 </div>
+                                    <div class="content-btn"> 按钮 </div>
+                                    <div class="content-btn"> 按钮 </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="example-grid">
+                            <div class="example-box">
+                                <div class="box-title"> 按钮 </div>
+                                <div class="box-content">
+                                    <div class="content-btn"> 按钮</div>
+                                    <div class="content-btn"> 按钮</div>
+                                    <div class="content-btn"> 按钮</div>
+                                    <div class="content-btn"> 按钮 </div>
+                                </div>
+                            </div>
+                            <div class="example-box">
+                                <div class="box-title"> 按钮 </div>
+                                <div class="box-content">
+                                    <div class="content-btn"> 按钮 </div>
+                                    <div class="content-btn"> 按钮 </div>
+                                    <div class="content-btn"> 按钮 </div>
+                                    <div class="content-btn"> 按钮 </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="switch-container">
+                            <div class="switch-btn"> 按钮 </div>
+                            <div class="switch-btn"> 按钮 </div>
+                        </div>
+                    </div>
+                    
+                  
+                    <div class="content-page" id="musicPage">
+                        <div class="example-grid">
+                            <div class="example-box">
+                                <div class="box-title">音乐</div>
+                                <div class="box-content">
+                                    <div class="content-btn"> 按钮 </div>
+                                    <div class="content-btn"> 按钮 </div>
+                                    <div class="content-btn"> 按钮 </div>
+                                    <div class="content-btn"> 按钮 </div>
+                                </div>
+                            </div>
+                            <div class="example-box">
+                                <div class="box-title"> 按钮 </div>
+                                <div class="box-content">
+                                    <div class="content-btn"> 按钮 1</div>
+                                    <div class="content-btn"> 按钮 2</div>
+                                    <div class="content-btn"> 按钮 3</div>
+                                    <div class="content-btn"> 按钮 4</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="example-grid">
+                            <div class="example-box">
+                                <div class="box-title"> 按钮 </div>
+                                <div class="box-content">
+                                    <div class="content-btn"> 按钮 </div>
+                                    <div class="content-btn"> 按钮 </div>
+                                    <div class="content-btn"> 按钮 </div>
+                                    <div class="content-btn"> 按钮 </div>
+                                </div>
+                            </div>
+                            <div class="example-box">
+                                <div class="box-title"> 按钮 </div>
+                                <div class="box-content">
+                                    <div class="content-btn"> 按钮 </div>
+                                    <div class="content-btn"> 按钮 </div>
+                                    <div class="content-btn"> 按钮 </div>
+                                    <div class="content-btn"> 按钮 </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="switch-container">
+                            <div class="switch-btn"> 按钮 </div>
+                            <div class="switch-btn"> 按钮 </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="music-panel">
+                <div class="music-display">青梧</div>
+                <div class="author-info">
+                    <div>作者:不凡不平凡</div>
+                    <div class="brand-highlight">代理:Λрκ^O^kaliкали㉿カリ™</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginPanel = document.getElementById('loginPanel');
+            const mainUI = document.getElementById('mainUI');
+            const loginBtn = document.getElementById('loginBtn');
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+            const loginMessage = document.getElementById('loginMessage');
+            const island = document.getElementById('island');
+            const notificationPopup = document.getElementById('notificationPopup');
+            const navBtns = document.querySelectorAll('.nav-btn');
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const contentPages = document.querySelectorAll('.content-page');
+            const controlBtns = document.querySelectorAll('.control-btn');
+            const closeBtn = document.querySelector('.close-btn');
+            
+        
+            loginBtn.addEventListener('click', function() {
+                const username = usernameInput.value.trim();
+                const password = passwordInput.value.trim();
+                
+                if (username === '不凡不平凡' && password === '1') {
+                    loginMessage.textContent = '验证成功！加载中...';
+                    loginMessage.style.color = '#64ffda';
+                    
+                    loginPanel.style.opacity = '0';
+                    loginPanel.style.pointerEvents = 'none';
+                    
+                    setTimeout(() => {
+                        mainUI.style.display = 'flex';
+                        setTimeout(() => {
+                            mainUI.style.opacity = '1';
+                        }, 50);
+                    }, 500);
+                } else {
+                    loginMessage.textContent = '用户名或密码错误！';
+                    
+                   
+                    loginPanel.animate([
+                        { transform: 'translateZ(20px) translateY(0) rotateX(5deg)' },
+                        { transform: 'translateZ(20px) translateY(-10px) rotateX(15deg)' },
+                        { transform: 'translateZ(20px) translateY(10px) rotateX(-5deg)' },
+                        { transform: 'translateZ(20px) translateY(0) rotateX(5deg)' }
+                    ], {
+                        duration: 600,
+                        iterations: 1
+                    });
+                }
+            });
+            
+          
+            island.addEventListener('click', function() {
+                notificationPopup.classList.toggle('show');
+                
+              
+                this.animate([
+                    { transform: 'translateX(-50%) translateZ(20px) scale(1)' },
+                    { transform: 'translateX(-50%) translateZ(20px) scale(1.1)' },
+                    { transform: 'translateX(-50%) translateZ(20px) scale(1)' }
+                ], {
+                    duration: 400,
+                    iterations: 1
+                });
+            });
+            
+           
+            navBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                
+                    navBtns.forEach(b => {
+                        if (b !== this) {
+                            b.classList.remove('active');
+                            b.animate([
+                                { transform: 'translateY(0) scale(1)', opacity: 0.8 },
+                                { transform: 'translateY(10px) scale(0.9)', opacity: 0.6 },
+                                { transform: 'translateY(0) scale(1)', opacity: 0.8 }
+                            ], {
+                                duration: 400,
+                                iterations: 1
+                            });
+                        }
+                    });
+                    
+                
+                    this.classList.add('active');
+                    
+              
+                    this.animate([
+                        { transform: 'scale(1)', boxShadow: '0 0 10px rgba(224, 64, 251, 0.5)' },
+                        { transform: 'scale(1.2)', boxShadow: '0 0 25px rgba(224, 64, 251, 0.9)' },
+                        { transform: 'scale(1.1)', boxShadow: '0 0 20px rgba(224, 64, 251, 0.8)' }
+                    ], {
+                        duration: 400,
+                        iterations: 1
+                    });
+                    
+                 
+                    const target = this.getAttribute('data-content');
+                    
+               
+                    contentPages.forEach(page => {
+                        if (page.id === `${target}Page`) {
+                            page.classList.add('active');
+                            
+                            
+                            page.animate([
+                                { opacity: 0, transform: 'translateY(20px)' },
+                                { opacity: 1, transform: 'translateY(0)' }
+                            ], {
+                                duration: 600,
+                                easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)',
+                                fill: 'forwards'
+                            });
+                        } else if (page.classList.contains('active')) {
+                            
+                            page.animate([
+                                { opacity: 1, transform: 'translateY(0)' },
+                                { opacity: 0, transform: 'translateY(-20px)' }
+                            ], {
+                                duration: 400,
+                                easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)',
+                                fill: 'forwards'
+                            }).onfinish = () => {
+                                page.classList.remove('active');
+                            };
+                        }
+                    });
+                });
+            });
+            
+           
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+              
+                    this.animate([
+                        { transform: 'scale(1)', background: 'rgba(65, 35, 110, 0.8)' },
+                        { transform: 'scale(1.1)', background: 'rgba(90, 45, 140, 0.9)' },
+                        { transform: 'scale(1.05)', background: 'linear-gradient(45deg, #9c27b0, #7b1fa2)' }
+                    ], {
+                        duration: 400,
+                        iterations: 1
+                    });
+                });
+            });
+            
+       
+            closeBtn.addEventListener('click', function() {
+        
+                mainUI.animate([
+                    { opacity: 1, transform: 'translateZ(20px) translateY(0) rotate3d(0.2, 0.5, 0.1, 1deg)' },
+                    { opacity: 0, transform: 'translateZ(20px) translateY(20px) rotate3d(0.2, -0.5, -0.1, -5deg)' }
+                ], {
+                    duration: 500,
+                    easing: 'ease-in-out',
+                    fill: 'forwards'
+                });
+                
+                setTimeout(() => {
+                    mainUI.style.display = 'none';
+                    loginPanel.style.opacity = '1';
+                    loginPanel.style.pointerEvents = 'all';
+                    loginMessage.textContent = '';
+                    
+                
+                    navBtns[0].classList.add('active');
+                    navBtns.forEach((b, i) => {
+                        if (i !== 0) b.classList.remove('active');
+                    });
+                    
+           
+                    document.getElementById('homePage').classList.add('active');
+                    contentPages.forEach((p, i) => {
+                        if (i !== 0) p.classList.remove('active');
+                    });
+                }, 500);
+            });
+            
+     
+            document.querySelectorAll('.nav-btn, .tab-btn, .content-btn, .switch-btn').forEach(btn => {
+                btn.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px) scale(1.1)';
+                    this.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.3)';
+                });
+                
+                btn.addEventListener('mouseleave', function() {
+                    if (!this.classList.contains('active')) {
+                        this.style.transform = '';
+                        this.style.boxShadow = '';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
