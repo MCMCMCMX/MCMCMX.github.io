@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <title>Rainbow AI - 用户中心</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/user.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 导航栏 -->
+        <nav>
+            <div class="logo flow-light-text">Rainbow AI</div>
+            <div class="nav-links">
+                <a href="../index.html">首页</a>
+                                <a href="../user/dashboard.php">用户中心</a>
+                <a href="../user/logout.php">退出登录</a>
+                            </div>
+            <div class="theme-toggle">
+                <i class="fas fa-palette"></i>
+            </div>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+        
+        <!-- 移动菜单 -->
+        <div class="mobile-menu">
+            <div class="close-menu">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="nav-links">
+                <a href="../index.html">首页</a>
+                                <a href="../user/dashboard.php">用户中心</a>
+                <a href="../user/logout.php">退出登录</a>
+                            </div>
+        </div>
+        
+        <!-- 色调调节面板 -->
+        <div class="theme-panel">
+            <div class="panel-header">
+                <h4>网页色调调节</h4>
+                <div class="close-panel"><i class="fas fa-times"></i></div>
+            </div>
+            <div class="theme-options">
+                <div class="option-group">
+                    <label>主题色调</label>
+                    <div class="color-options">
+                        <div class="color-option active" data-theme="rainbow" style="background: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);"></div>
+                        <div class="color-option" data-theme="blue" style="background: linear-gradient(45deg, #0575E6, #021B79);"></div>
+                        <div class="color-option" data-theme="green" style="background: linear-gradient(45deg, #56ab2f, #a8e063);"></div>
+                        <div class="color-option" data-theme="purple" style="background: linear-gradient(45deg, #DA22FF, #9733EE);"></div>
+                        <div class="color-option" data-theme="sunset" style="background: linear-gradient(45deg, #FF416C, #FF4B2B);"></div>
+                    </div>
+                </div>
+                <div class="option-group">
+                    <label>背景风格</label>
+                    <div class="bg-options">
+                        <div class="bg-option active" data-bg="dark">
+                            <div class="bg-preview dark-preview"></div>
+                            <span>暗色</span>
+                        </div>
+                        <div class="bg-option" data-bg="light">
+                            <div class="bg-preview light-preview"></div>
+                            <span>亮色</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="option-group">
+                    <label>亮度调节</label>
+                    <input type="range" min="1" max="100" value="50" class="brightness-slider">
+                </div>
+                div class="option-group">
+                    <label>对比度</label>
+                    <input type="range" min="1" max="100" value="50" class="contrast-slider">
+                </div>
+            </div>
+            <div class="theme-footer">
+                <button class="reset-theme">重置</button>
+                <button class="save-theme">保存设置</button>
+            </div>
+        </div>
+        <div class="theme-overlay"></div> 
+<div class="main-content">
+    <div class="user-panel">
+        <!-- 侧边栏 -->
+        <div class="sidebar">
+            <div class="user-info">
+                <div class="avatar">
+                    <img src="https://q1.qlogo.cn/g?b=qq&nk=3454871512&s=100" alt="用户头像">
+                </div>
+                <div class="user-name">不凡不平凡</div>
+                <div class="user-status free">会员用户</div
+                <div class="user-level">Lv.100 (会员用户)</div>
+            </div>
+            
+            <ul class="sidebar-menu">
+                <li><a href="dashboard.php"><i class="fas fa-home"></i> 主页</a></li>
+                <li><a href="profile.php"><i class="fas fa-user"></i> 个人资料</a></li>
+                <li><a href="vip.php" class="active"><i class="fas fa-crown"></i> Pro 激活</a></li>
+                <li><a href="device.php"><i class="fas fa-mobile-alt"></i> 设备管理</a</li>
+                <li><a href="download.php"><i class="fas fa-download"></i> 软件下载</a></li>
+                <li><a href="history.php"><i class="fas fa-history"></i> 签到记录</a></li>
+                                  <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> 退出登录</a></li>
+            </ul>
+        </div>
+        
+        <!-- 内容区域 -->
+        <div class="content-area">
+                            <div class="alert alert-danger">
+                    注册成功                </div>
+                        
+                        
+            <!-- 会员状态卡片 -->
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">会员状态</h4>
+                </div>
+                
+                <div style="padding: 10px 0;">
+                                            <div style="background: 10px; text-align: ; margin-bottom: 15px;">
+                            <h3 style="margin-bottom: 10px;">您当前是会员用户</h3>
+                            <p>升级到 Pro 会员，享受更多高级功能和特权</p>
+                        </div>
+                                    </div>
+            </div>
+            
+            <!-- 卡密激活卡片 -->
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">卡密激活</h4>
+                </div>
+                
+                <div style="padding: 20px 0;">
+                    <form method="POST" action="">
+                        <div class="form-group">
+                            <label for="cdkey">输入卡密</label>
+                            <div style="display: flex; gap: 10px;">
+                                <input type="text" id="cdkey" name="cdkey" class="form-control" required placeholder="请输入16位卡密">
+                                <button type="submit" name="activate" class="btn btn-primary">
+                                    <i class="fas fa-check"></i> 激活
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    
+                    <div style="margin-top: 20px;">
+                        <h4>卡密使用说明：</h4>
+                        <ul style="padding-left: 20px; margin-top: 10px;">
+                            <li>卡密为一次性使用，激活后即失效</li>
+                            <li>卡密可以在已有会员基础上叠加时长</li>
+                            <li>卡密有多种类型，对应不同的会员时长</li>
+                            <li>如卡密无法使用，请联系客服处理</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 卡密记录卡片 -->
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">卡密使用记录</h4>
+                </div>
+                
+                                    <div style="padding: 20px; text-align: center;">
+                        <p>暂无卡密使用记录</p>
+                    </div>
+                            </div>
+            
+            <!-- 购买卡密卡片 -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">购买卡密</h3>
+                </div>
+                
+                <div style="padding: 20px;">
+                    <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+                        <div style="flex: 1; min-width: 200px; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 10px; text-align: center;">
+                            <h4>日卡</h4>
+                            <div style="font-size: 1.8rem; font-weight: bold; margin: 10px 0;">¥10</div>
+                            <p>有效期: 1天</p>
+                            <a href="https://lv.youxi186.com/shop/pianai" class="btn btn-primary" style="width: 100%; margin-top: 10px;">购买</a>
+                        </div>
+                        
+                        <div style="flex: 1; min-width: 200px; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 10px; text-align: center;">
+                            <h4>周卡</h4>
+                            <div style="font-size: 1.8rem; font-weight: bold; margin: 10px 0;">¥28</div>
+                            <p>有效期: 7天</p>
+                            <a href="https://lv.youxi186.com/shop/pianai" class="btn btn-primary" style="width: 100%; margin-top: 10px;">购买</a>
+                        </div>
+                        
+                        <div style="flex: 1; min-width: 200px; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 0 15px rgba(41, 151, 255, 0.3); border: 1px solid var(--primary);">
+                            <div style="position: absolute; top: -10px; right: 10px; background: var(--primary); color: white; padding: 2px 10px; border-radius: 10px; font-size: 0.8rem; font-weight: bold;">推荐</div>
+                            <h4>月卡</h4>
+                            <div style="font-size: 1.8rem; font-weight: bold; margin: 10px 0;">¥68</div>
+                            <p>有效期: 30天</p>
+                            <a href="https://lv.youxi186.com/shop/pianai" class="btn btn-primary" style="width: 100%; margin-top: 10px;">购买</a>
+                        </div>
+                        
+                        <div style="flex: 1; min-width: 200px; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 10px; text-align: center;">
+                            <h4>季卡</h4>
+                            <div style="font-size: 1.8rem; font-weight: bold; margin: 10px 0;">¥108</div>
+                            <p>有效期: 90天</p>
+                            <a href="https://lv.youxi186.com/shop/pianai" class="btn btn-primary" style="width: 100%; margin-top: 10px;">购买</a>
+                        </div>
+                        
+                        <div style="flex: 1; min-width: 200px; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 10px; text-align: center;">
+                            <h4>永久卡</h4>
+                            <div style="font-size: 1.8rem; font-weight: bold; margin: 10px 0;">¥258</div>
+                            <>永久有效</p>
+                            <a href="https://lv.youxi186.com/shop/pianai" class="btn btn-primary" style="width: 100%; margin-top: 10px;">购买</a>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 20px; text-align: center; padding: 10px; background: rgba(255,204,0,0.1); border-radius: 10px;">
+                        <p>如需批量购买卡密或有其他问题，请联系客服 QQ: 21881964</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// 卡密激活成功后的特效
+document.addEventListener('DOMContentLoaded', function() {
+        
+    // 到期提醒
+    });
+
+// 卡密输入框优化
+document.addEventListener('DOMContentLoaded', function() {
+    const cdkeyInput = document.querySelector('#cdkey');
+    if (cdkeyInput) {
+        cdkeyInput.addEventListener('input', function() {
+            // 自动转换为大写并格式化
+            this.value = this.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+        });
+        
+        cdkeyInput.addEventListener('paste', function(e) {
+            setTimeout(() => {
+                this.value = this.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+            }, 10);
+        });
+    }
+});
+</script>
+
+        <!-- 页脚 -->
+        <footer>
+            <div class="footer-content">
+                <div class="footer-logo flow-light-text">Rainbow AI</div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>产品</h4>
+                        <a href="../index.html#download">下载</a>
+                        <a href="../index.html#features">特性</a>
+                        <a href="../index.html#about">关于</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>支持</h4>
+                        <a href="../index.html#support">常见问题</a>
+                        <a href="../user/dashboard.php">用户中心</a>
+                        <a href="../user/contact.php">联系我们</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>关注我们</h4>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-weixin"></i></a>
+                            <a href="#"><i class="fab fa-qq"></i></a>
+                            <a href="#"><i class="fab fa-weibo"></i></a>
+                            <a href="#"><i class="fab fa-bilibili"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Rainbow AI. 保留所有权利。</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="../js/script.js"></script>
+    <script>
+        // 用户中心专用脚本
+        document.addEventListener('DOMContentLoaded', function() {
+            // 如果有侧边栏菜单，添加激活当前页面的代码
+            const sideMenuLinks = document.querySelectorAll('.sidebar-menu a');
+            if(sideMenuLinks) {
+                const currentPath = window.location.pathname;
+                sideMenuLinks.forEach(link => {
+                    if(currentPath.endsWith(link.('href'))) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>  
